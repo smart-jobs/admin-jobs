@@ -33,17 +33,6 @@ export const actions = {
       commit(types.PLATFORM_INIT, { unit: tenant, name: '中心主站' });
     }
 
-
-    // console.log(app.$axios);
-    await dispatch('naf/menu/load');
-    // if (req.session && req.session.authUser){
-    //   commit('login/' + types.USER_INFO, req.session.authUser);
-    //   commit('login/' + types.LOGIN_SUCCESS, { userinfo: req.session.authUser, token: req.session.access_token});
-    //   if(state.platform === 'school') {
-    //     commit('login/' + types.SELECT_UNIT, req.session.unitcode);
-    //   }
-    // }
-
     // 从cookie中解析navMode和jwt token
     //console.log('req.cookies', req.cookies); // express使用cookie-parse中间件才能用这个
     if (req.headers.cookie && cookieParser) {

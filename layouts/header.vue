@@ -18,7 +18,7 @@
 </template>
 <script>
 import { createNamespacedHelpers } from 'vuex';
-import config from '@/config';
+import config from '@frame/config';
 import NafHeader from '@naf/frame/header';
 import NafFooter from '@naf/frame/footer';
 import NafMenu from '@naf/frame/sider';

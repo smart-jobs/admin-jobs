@@ -2,7 +2,7 @@ import Vue from 'vue';
 import qs from 'qs';
 import assert from 'assert';
 import * as types from './.mutation.js';
-import config from '@/utils/config.js';
+import config from '@frame/config';
 const { pageSize = 10 } = config;
 
 const api = {

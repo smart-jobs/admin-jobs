@@ -32,7 +32,7 @@
 <script>
 import Vue from 'vue'
 import { createNamespacedHelpers } from 'vuex';
-import config from '@/config';
+import config from '@frame/config';
 import QRCode from 'qrcode';
 import { Client } from '@stomp/stompjs/esm5/client';
 

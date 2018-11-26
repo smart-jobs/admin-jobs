@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="section_title">首页</header>
+    <header class="section_title">招聘管理</header>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 
 export default {
   head: {
-    title: '首页'
+    title: '招聘管理'
   }
 };
 </script>

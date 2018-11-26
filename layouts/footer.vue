@@ -11,7 +11,7 @@
 </template>
 <script>
 import NafFooter from '@naf/frame/footer';
-import config from '@/config';
+import config from '@frame/config';
 
 const { layout } = config;
 
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~@/style/theme';
+@import '~@frame/style/theme';
 
 .footer {
   position: absolute;
