@@ -1,0 +1,61 @@
+@import "./theme.less";
+
+html, body, #app{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+[class*=" el-icon-naf"], [class^=el-icon-naf] {
+  font-family: naf-icons!important;
+}
+
+.globalFooter {
+  padding: 0 16px;
+  margin: 48px 0 24px 0;
+  text-align: center;
+
+  .links {
+    margin-bottom: 8px;
+
+    a {
+      color: @text-color-secondary;
+      transition: all .3s;
+
+      &:not(:last-child) {
+        margin-right: 40px;
+      }
+
+      &:hover {
+        color: @text-color;
+      }
+    }
+  }
+
+  .copyright {
+    color: @text-color-secondary;
+    font-size: @font-size-base;
+  }
+}
+
+.el-menu-item [class^=naf-icon],.el-submenu [class^=naf-icon] {
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#__nuxt,
+#__layout {
+  width: 100%;
+  height: 100%;
+}
+body {
+  min-width: 920px;
+}
