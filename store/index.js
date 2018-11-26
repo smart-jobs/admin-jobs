@@ -33,18 +33,6 @@ export const actions = {
       commit(types.PLATFORM_INIT, { unit: tenant, name: '中心主站' });
     }
 
-    // 从cookie中解析navMode和jwt token
-    //console.log('req.cookies', req.cookies); // express使用cookie-parse中间件才能用这个
-    if (req.headers.cookie && cookieParser) {
-      const parsed = cookieParser.parse(req.headers.cookie)
-      const { navMode, auth } = parsed;
-      if(navMode) {
-        commit('naf/menu/NAV_SWITCH_MODE', navMode);
-      }
-      if(auth) {
-        commit('login/' + types.LOGIN_SUCCESS, { token: auth });
-      }
-    }
   },
 };
 

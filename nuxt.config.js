@@ -30,12 +30,12 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ['element-ui/lib/theme-chalk/index.css', { src: '@frame/style/index.less', lang: 'less' }, { src: '@frame/style/common.less', lang: 'less' }],
+  css: ['element-ui/lib/theme-chalk/index.css', { src: join(frameSrc,'/style/index.less'), lang: 'less' }, { src: join(frameSrc,'/style/common.less'), lang: 'less' }],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@frame/plugins/element-ui', '@frame/plugins/axios', '@frame/plugins/check-res', '@frame/plugins/naf-dict'],
+  plugins: ['@/plugins/element-ui', '@/plugins/axios', '@/plugins/check-res', '@/plugins/naf-dict'],
   /*
    ** Nuxt.js modules
    */
@@ -59,7 +59,7 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
     proxy: true,
     prefix: `${system_prefix}/api`,
-    port: 3000,
+    port: 3100,
   },
   proxy: [`http://localhost:8002${system_prefix}/api/naf/dict`, `http://localhost:8001${system_prefix}/api/naf`],
   loader: [
@@ -106,12 +106,6 @@ module.exports = {
   },
   router: {
     base: `${module_prefix}/`,
-    extendRoutes(routes) {
-      // TODO: 重定向默认地址到'/system'
-      let index = routes.findIndex(p => p.path === '/');
-      if (index != -1) routes[index] = { path: '/', redirect: '/system' };
-      else routes.push({ path: '/', redirect: '/system' });
-    },
   },
   vue: {
     config: {},
