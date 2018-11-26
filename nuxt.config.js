@@ -21,7 +21,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, { rel: 'stylesheet', href: `${url_prefix}/naf-icons/iconfont.css` }],
+    link: [{ rel: 'stylesheet', href: `${system_prefix}/naf-icons/iconfont.css` }],
   },
   /*
    ** Customize the progress bar color
@@ -30,7 +30,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ['element-ui/lib/theme-chalk/index.css', { src: '~/style/index.less', lang: 'less' }, { src: '~/style/common.less', lang: 'less' }],
+  css: ['element-ui/lib/theme-chalk/index.css', { src: '@frame/style/index.less', lang: 'less' }, { src: '@frame/style/common.less', lang: 'less' }],
 
   /*
    ** Plugins to load before mounting the App
@@ -116,8 +116,4 @@ module.exports = {
   vue: {
     config: {},
   },
-  serverMiddleware: [
-    // API middleware
-    '~/api/index.js',
-  ],
 };
