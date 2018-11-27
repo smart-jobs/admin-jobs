@@ -21,7 +21,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 3100,
+    port: 3002,
     before(app) {
       app.use((req, res, next) => {
         // eslint-disable-next-line no-console
@@ -30,11 +30,7 @@ module.exports = {
       });
     },
     proxy: {
-      '/weixin': {
-        // target: 'http://localhost:9000',
-        target: 'http://smart.jilinjobswx.cn',
-      },
-      '/platform/api/jobs': {
+      '/platform/api': {
         // target: 'http://localhost:9000',
         target: 'http://99991.smart.chinahuian.cn',
       },
