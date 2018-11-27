@@ -2,6 +2,6 @@
 /build_bak/
 /config/
 /dist/
-/*.js
 /bak/
 /static/
+/node_modules/
