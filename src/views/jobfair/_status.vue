@@ -54,9 +54,6 @@ export default {
     // Must be a number
     return /^[0-2]$/.test(params.status);
   },
-  asyncData({ params }) {
-    return { status: params.status };
-  },
   created() {
     this.handleQuery();
   },
@@ -84,6 +81,9 @@ export default {
   },
   computed: {
     ...mapState(['items', 'current', 'total']),
+    status() {
+      return this.$route.params.status;
+    },
   },
 };
 </script>
