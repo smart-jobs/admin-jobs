@@ -59,7 +59,7 @@ export const actions = {
       const rs1 = res;
       res = await this.$axios.$get(api.listXzqh, { level: 2 });
       if (res.errcode) return res;
-      const rs2 = res;
+      const rs2 = res.data || res;
       res = rs1.map(p => {
         const prefix = p.code.substr(0, 2);
         const children = rs2.filter(c => c.code !== p.code && c.code.startsWith(prefix));
@@ -71,7 +71,8 @@ export const actions = {
     }
 
     if (!res.errcode) {
-      commit(LOADED, { category: payload, items: res });
+      commit(LOADED, { category: payload, items: res.data || res });
+      return res.data || res;
     }
     return res;
   },
