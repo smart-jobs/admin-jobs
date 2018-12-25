@@ -4,7 +4,7 @@
       @open="handleOpen" @query="handleQuery" v-if="view ==  'list'">
     </data-grid>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
-      <div slot="header" class="clearfix">
+      <div slot="header">
         <span>企业注册信息</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
