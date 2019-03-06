@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './App.vue';
+import App from './AppFrame.vue';
 import router from './router';
 //import store from './store';
 import '@lib/plugins/meta';
@@ -8,6 +8,7 @@ import '@lib/plugins/axios';
 import '@lib/plugins/check-res';
 import '@lib/plugins/naf-dict';
 import { createStore } from '@lib/utils/store';
+import '@/style/index.less';
 
 Vue.config.productionTip = false;
 

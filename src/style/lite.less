@@ -1,0 +1,53 @@
+.lite {
+  //min-height: 100%;
+  min-width: 720px;
+  min-height: 500px;
+  height: 100%;
+  width: 100%;
+  padding-right: 10px;
+  // display: flex;
+  // justify-content: flex-start;
+  // flex-direction: row;
+  .el-card {
+    min-height: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .el-card /deep/ .el-card__header {
+    padding: 10px;
+    .title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .action {
+      padding: 0px 10px;
+      float: right;
+      .el-button--text {
+        padding: 0px;   
+      }
+      .el-button + .el-button {
+        margin-left: 5px;   
+      }
+    }
+  }
+  .el-card /deep/ .el-card__body {
+    flex: 1;
+    padding: 0;
+  }
+}
+
+.right.list /deep/ .el-card__body {
+  padding: 0;
+  /deep/ .el-table__body-wrapper {
+    min-height: 200px;
+  }
+}
+.el-table--mini .naf-icons {
+  font-size: 12px;
+}
+
+.el-table--mini .icon + .icon {
+  margin-left: 3px;
+}

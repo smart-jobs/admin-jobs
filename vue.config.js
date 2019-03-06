@@ -31,8 +31,15 @@ module.exports = {
     },
     proxy: {
       '/platform/api': {
-        // target: 'http://localhost:9000',
-        target: 'http://99991.smart.chinahuian.cn',
+        target: 'http://smart.localhost:8000',
+        // target: 'http://99991.smart.chinahuian.cn',
+      },
+      '/files': {
+        target: 'http://smart.chinahuian.cn',
+      },
+      '/ddapi': {
+        target: 'http://smart.localhost:8008',
+        pathRewrite: { '^/ddapi': '' },
       },
     },
   },

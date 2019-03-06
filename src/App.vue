@@ -4,7 +4,7 @@
       <i class="weui-loading"></i>
       <span class="weui-loadmore__tips">正在加载</span>
     </div>
-    <router-view v-else/>
+    <router-view v-else />
   </div>
 </template>
 
