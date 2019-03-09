@@ -31,6 +31,7 @@ export default {
   h1 {
     display: inline-block;
     margin: 0 0 0 12px;
+    font-size: 1.3em;
   }
 
   .el-switch {
