@@ -1,15 +1,13 @@
 <template>
   <div class="lite">
-    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" 
-      @open="handleOpen" @query="handleQuery" v-if="view ==  'list'">
+    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" @open="handleOpen" @query="handleQuery" v-if="view == 'list'">
     </data-grid>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
       <div slot="header">
         <span>企业用户信息</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <cord-info :data="current">
-      </cord-info>
+      <cord-info :data="current"> </cord-info>
     </el-card>
   </div>
 </template>
@@ -62,5 +60,4 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

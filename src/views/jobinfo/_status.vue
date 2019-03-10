@@ -1,6 +1,6 @@
 <template>
   <div class="lite">
-    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" 
+    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total"
       @open="handleOpen" @query="handleQuery" v-if="view ==  'list'">
     </data-grid>
     <el-card class="details" size="mini" v-else-if="view == 'details'">

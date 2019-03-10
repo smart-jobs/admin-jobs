@@ -1,18 +1,16 @@
 <template>
   <div class="lite">
-    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" 
-      @open="handleOpen" @query="handleQuery" v-if="view ==  'list'">
+    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" @open="handleOpen" @query="handleQuery" v-if="view == 'list'">
     </data-grid>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
       <div slot="header">
         <span>企业注册信息</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-info :data="current">
-      </data-info>
+      <data-info :data="current"> </data-info>
       <div v-if="status == '2'">
-      <el-button type="primary" @click="handleReview('0')">审核通过</el-button>
-      <el-button type="info" @click="handleReview('3')">审核拒绝</el-button>
+        <el-button type="primary" @click="handleReview('0')">审核通过</el-button>
+        <el-button type="info" @click="handleReview('3')">审核拒绝</el-button>
       </div>
     </el-card>
   </div>
@@ -85,5 +83,4 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>
