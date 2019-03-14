@@ -75,6 +75,7 @@ export default {
       }
     },
     handleQuery({ filter, paging } = {}) {
+      this.view = 'list';
       this.query({ status: this.status, paging });
     },
   },

@@ -52,6 +52,7 @@ export default {
       }
     },
     handleQuery({ filter, paging } = {}) {
+      this.view = 'list';
       this.queryInfo({ paging });
     },
   },

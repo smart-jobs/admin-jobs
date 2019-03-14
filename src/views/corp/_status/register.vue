@@ -72,6 +72,7 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     handleQuery({ filter, paging } = {}) {
+      this.view = 'list';
       this.queryReg({ status: this.status, paging });
     },
   },
