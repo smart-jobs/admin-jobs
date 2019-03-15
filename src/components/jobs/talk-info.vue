@@ -3,30 +3,31 @@
     <el-tab-pane label="基本信息" name="first">
       <el-form label-width="100px">
         <el-form-item label="主题">
-          {{data.subject}}
+          {{ data.subject }}
         </el-form-item>
         <el-form-item label="企业名称">
-          {{ getFieldValue('corp.name')}}
+          {{ getFieldValue('corp.name') }}
         </el-form-item>
         <el-form-item label="宣讲城市">
-          {{ getFieldValue('city.name')}}
+          {{ getFieldValue('city.name') }}
         </el-form-item>
         <el-form-item label="宣讲学校">
-          {{ getFieldValue('school')}}
+          {{ getFieldValue('unit') }}
         </el-form-item>
         <el-form-item label="宣讲时间">
-          {{getFieldValue('city.name')}}
+          {{ getFieldValue('date') }}
+          {{ getFieldValue('time') }}
         </el-form-item>
         <el-form-item label="宣讲地址">
-          {{getFieldValue('address')}}
+          {{ getFieldValue('address') }}
         </el-form-item>
         <el-form-item label="审核状态">
-          {{data.status}}
+          {{ data.status }}
         </el-form-item>
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="信息详情" name="second">
-      {{data.content}}
+      {{ data.content }}
     </el-tab-pane>
   </el-tabs>
 </template>
