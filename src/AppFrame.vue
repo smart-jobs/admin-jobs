@@ -10,7 +10,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import Frame from '@/layouts/frame';
+import Frame from '@lib/layouts/frame';
 
 export default {
   components: {
