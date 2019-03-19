@@ -6,7 +6,7 @@ import config from '@frame/config';
 const { pageSize = 10 } = config;
 
 const api = {
-  review: '/jobs/jobfair/create',
+  create: '/jobs/jobfair/create',
   update: '/jobs/jobfair/update',
   query: '/jobs/jobfair/query',
   fetch: '/jobs/jobfair/fetch',
