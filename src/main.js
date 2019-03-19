@@ -8,7 +8,7 @@ import '@lib/plugins/axios';
 import '@lib/plugins/check-res';
 import '@lib/plugins/naf-dict';
 import { createStore } from '@lib/utils/store';
-import '@/style/index.less';
+import '@lib/style/index.less';
 
 Vue.config.productionTip = false;
 
