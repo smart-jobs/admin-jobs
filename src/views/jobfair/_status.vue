@@ -5,7 +5,19 @@
         <span>招聘会列表</span>
         <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" v-if="status == '0'">创建招聘会</el-button>
       </div>
-      <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" @open="handleOpen" @query="handleQuery"> </data-grid>
+      <data-grid
+        :data="items"
+        :meta="fields"
+        :operation="operation"
+        :paging="true"
+        :total="total"
+        @open="handleOpen"
+        @query="handleQuery"
+        @edit="handleEdit"
+        @publish="handlePublish"
+        @unpublish="handleUnpublish"
+      >
+      </data-grid>
     </el-card>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
       <div slot="header">
@@ -13,10 +25,6 @@
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
       <data-info :data="current"> </data-info>
-      <!-- <div v-if="status == '1'">
-        <el-button type="primary" @click="handleReview('0')">审核通过</el-button>
-        <el-button type="info" @click="handleReview('2')">审核拒绝</el-button>
-      </div> -->
     </el-card>
     <el-card class="right details" size="mini" v-else-if="view == 'form'">
       <div slot="header">
@@ -31,7 +39,7 @@
 import DataInfo from '@/components/jobs/fair-info';
 import DataForm from '@/components/jobs/fair-form';
 import DataGrid from '@naf/data/filter-grid';
-import { createNamespacedHelpers } from 'vuex';
+import { createNamespacedHelpers, mapGetters } from 'vuex';
 
 const { mapState, mapActions } = createNamespacedHelpers('jobs/jobfair');
 
@@ -59,7 +67,16 @@ export default {
         { name: 'time', label: '举办时间' },
         { name: 'meta.createdAt', label: '创建时间' },
       ],
-      operation: [['open', '查看'], ['edit', '编辑']] /* 操作类型 */,
+      /* 操作类型 */
+      oper0: [
+        ['open', '查看', 'el-icon-view'],
+        ['edit', '编辑', 'el-icon-edit'],
+        ['publish', '发布', 'el-icon-share', '招聘会发布后，将不在接受企业参展申请，也不能修改招聘会信息。是否现在发布招聘会？'],
+      ] /* 操作类型 */,
+      oper1: [
+        ['open', '查看', 'el-icon-view'],
+        ['unpublish', '取消发布', 'el-icon-back', '取消发布后，可以修改招聘会信息，企业也可以提交参展申请。是否现在发布招聘会？'],
+      ],
     };
   },
   validate({ params }) {
@@ -92,8 +109,15 @@ export default {
       this.query({ status: this.status, paging });
     },
     handleNew() {
-      this.form = { data: { type: '校园招聘会' }, isNew: true };
+      this.form = { data: { type: '校园招聘会', unit: this.unit }, isNew: true };
       this.view = 'form';
+    },
+    async handleEdit({ id }) {
+      const res = await this.fetch({ id });
+      this.$checkRes(res, () => {
+        this.form = { data: { ...res.data }, isNew: false };
+        this.view = 'form';
+      });
     },
     async handleSave(payload) {
       let res, msg;
@@ -109,11 +133,23 @@ export default {
         this.view = 'list';
       }
     },
+    async handlePublish({ id }) {
+      const res = await this.update({ id, data: { status: '1' } });
+      this.$checkRes(res, '招聘会发布成功，将不再接受企业参会申请，也不能修改招聘会信息');
+    },
+    async handleUnpublish({ id }) {
+      const res = await this.update({ id, data: { status: '0' } });
+      this.$checkRes(res, '操作成功，现在可以接受企业参会申请，也可以修改招聘会信息');
+    },
   },
   computed: {
     ...mapState(['items', 'current', 'total']),
+    ...mapGetters(['unit']),
     status() {
       return this.$route.params.status;
+    },
+    operation() {
+      return this.status === '0' ? this.oper0 : this.oper1;
     },
   },
 };

@@ -7,33 +7,34 @@
       <el-form-item label="类型" prop="type" :required="true">
         <el-select v-model="form.type" placeholder="请选择招聘会类型">
           <el-option label="校园招聘会" value="校园招聘会"> </el-option>
-          <el-option label="网络招聘会" value="网络招聘会"> </el-option>
+          <el-option label="网络招聘会" value="网络招聘会" :disabled="true"> </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="举办城市" prop="city" :required="true">
-        <code-select category="xzqh" v-model="form.city" mode="pair" placeholder="请选择举办城市"> </code-select>
+      <!-- <el-form-item label="举办单位" prop="city">
+        <code-select category="unit" v-model="form.unit" disabled> </code-select>
+      </el-form-item> -->
+      <el-form-item label="举办城市" prop="city">
+        <code-select category="city" v-model="form.city" mode="pair" placeholder="请选择城市"> </code-select>
       </el-form-item>
       <el-form-item label="举办地址" prop="address" :required="true">
-        <el-input v-model="form.address"></el-input>
+        <el-input v-model="form.address" placeholder="请输入地址描述"></el-input>
       </el-form-item>
       <el-form-item label="举办日期" prop="date" :required="true">
-        <el-date-picker v-model="form.date" type="date" value-format="yyyy-MM-dd" placeholder="选择举办日期"> </el-date-picker>
+        <el-date-picker v-model="form.date" type="date" value-format="yyyy-MM-dd" placeholder="请选择日期"> </el-date-picker>
       </el-form-item>
       <el-form-item label="举办时间" prop="time" :required="true">
-        <el-input v-model="form.time" placeholder="请输入举办时间描述"></el-input>
+        <el-input v-model="form.time" placeholder="请输入时间描述"></el-input>
       </el-form-item>
       <el-form-item label="招聘会详情" prop="content" :required="true">
         <wang-editor v-model="form.content" upload-img-server="/files/jobs/jobfair/upload"></wang-editor>
       </el-form-item>
       <el-form-item label="数量限制" prop="limit.count" v-if="form.type == '校园招聘会'">
-        <el-input-number placeholder="外校学生申请普通门票数量" type="number" v-model="form.limit.count"> </el-input-number>
+        <el-input-number placeholder="" type="number" v-model="form.limit.count" :min="0"> </el-input-number>
+        <span class="desc">非本校学生申请普通入场券数量限制，本校学生不限制。</span>
       </el-form-item>
       <el-form-item label="时间限制" prop="limit.time" v-if="form.type == '校园招聘会'">
-        <el-time-select
-          v-model="form.limit.time"
-          :picker-options="{ start: '08:30', step: '00:10', end: '18:30' }"
-          placeholder="受限门票入场时间"
-        ></el-time-select>
+        <el-time-select v-model="form.limit.time" :picker-options="{ start: '08:30', step: '00:10', end: '18:30' }" placeholder="受限入场时间"></el-time-select>
+        <span class="desc">受限入场券只能在规定之后入场，普通入场券无限制。</span>
       </el-form-item>
       <el-form-item label="验证密码" prop="secret" v-if="form.type == '校园招聘会'">
         <el-input v-model="form.secret" placeholder="请输入扫码设备验证密码" type="password"></el-input>
@@ -62,14 +63,14 @@ export default {
     WangEditor,
     CodeSelect,
   },
-  name: 'draft-form',
+  name: 'fair-form',
   props: {
     data: { type: Object, required: true },
     isNew: { type: Boolean, default: false } /* 是否新创建 */,
   },
   data() {
     return {
-      form: { limit: {}, ..._.cloneDeep(this.data) },
+      form: { limit: { count: 0 }, ..._.cloneDeep(this.data) },
       rules: {
         subject: requiredAndMaxlen('主题', 100),
         type: requiredAndMaxlen('类型', 40),
@@ -96,5 +97,9 @@ export default {
 <style lang="less" scoped>
 .el-form-item {
   width: 700px;
+}
+.desc {
+  color: gray;
+  margin-left: 20px;
 }
 </style>

@@ -10,6 +10,7 @@ const api = {
   review: '/jobs/jobinfo/review',
   update: '/jobs/jobinfo/update',
   fetch: '/jobs/jobinfo/fetch',
+  create: '/jobs/jobinfo/create',
 };
 // initial state
 export const state = () => ({
@@ -35,9 +36,14 @@ export const actions = {
     if (res.errcode === 0) commit(types.UPDATED, { status, id });
     return res;
   },
-  async update({ commit }, { status, id }) {
-    const res = await this.$axios.$post(`${api.update}?id=${id}`, { status });
-    if (res.errcode === 0) commit(types.UPDATED, { status, id });
+  async create({ commit }, { data }) {
+    const res = await this.$axios.$post(`${api.create}`, data);
+    if (res.errcode === 0) commit(types.CREATED, res.data);
+    return res;
+  },
+  async update({ commit }, { data, id }) {
+    const res = await this.$axios.$post(`${api.update}?id=${id}`, data);
+    if (res.errcode === 0) commit(types.UPDATED, res.data);
     return res;
   },
   async fetch({ commit }, { id }) {
@@ -59,6 +65,9 @@ export const mutations = {
   [types.UPDATED](state, payload) {
     const idx = state.items.findIndex(p => p._id === payload._id);
     Vue.set(state.items, idx, payload);
+  },
+  [types.CREATED](state, payload) {
+    state.items.push(payload);
   },
 };
 

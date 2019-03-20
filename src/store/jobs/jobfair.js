@@ -30,14 +30,14 @@ export const actions = {
     }
     return res;
   },
-  async create({ commit }, { status, id }) {
-    const res = await this.$axios.$post(`${api.create}`, { status });
-    if (res.errcode === 0) commit(types.CREATED, { status, id });
+  async create({ commit }, { data }) {
+    const res = await this.$axios.$post(`${api.create}`, data);
+    if (res.errcode === 0) commit(types.CREATED, res.data);
     return res;
   },
-  async update({ commit }, { status, id }) {
-    const res = await this.$axios.$post(`${api.update}?id=${id}`, { status });
-    if (res.errcode === 0) commit(types.UPDATED, { status, id });
+  async update({ commit }, { data, id }) {
+    const res = await this.$axios.$post(`${api.update}?id=${id}`, data);
+    if (res.errcode === 0) commit(types.UPDATED, res.data);
     return res;
   },
   async fetch({ commit }, { id }) {

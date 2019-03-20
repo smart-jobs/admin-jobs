@@ -45,4 +45,5 @@ export const actions = {
 export const getters = {
   userinfo: state => state.userinfo,
   platform: state => state.platform,
+  unit: state => state.unit,
 };
