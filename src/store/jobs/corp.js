@@ -27,8 +27,8 @@ export const actions = {
   async queryReg({ commit }, { status, corpname, paging = {} }) {
     const { page = 1, size = pageSize } = paging;
     const skip = Math.max(0, (page - 1) * size);
-    const param = qs.stringify({ status, skip, size });
-    const res = await this.$axios.$get(`${api.queryReg}?${param}`);
+    const param = { status, corpname, skip, limit: size };
+    const res = await this.$axios.$get(api.queryReg, param);
     if (res.errcode === 0) {
       commit(types.LOADED, res);
     }
@@ -53,8 +53,8 @@ export const actions = {
   async queryInfo({ commit }, { status, corpname, paging = {} }) {
     const { page = 1, size = pageSize } = paging;
     const skip = Math.max(0, (page - 1) * size);
-    const param = qs.stringify({ status, corpname, skip, size });
-    const res = await this.$axios.$get(`${api.queryInfo}?${param}`);
+    const param = { status, corpname, skip, limit: size };
+    const res = await this.$axios.$get(api.queryInfo, param);
     if (res.errcode === 0) {
       commit(types.LOADED, res);
     }

@@ -5,7 +5,17 @@
         <span>宣讲会列表</span>
         <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" v-if="status == '0'">发布宣讲会</el-button>
       </div>
-      <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" @open="handleOpen" @query="handleQuery" @edit="handleEdit">
+      <data-grid
+        :data="items"
+        :meta="fields"
+        :operation="operation"
+        :paging="true"
+        :total="total"
+        :filter="true"
+        @open="handleOpen"
+        @query="handleQuery"
+        @edit="handleEdit"
+      >
       </data-grid>
     </el-card>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
@@ -53,7 +63,7 @@ export default {
       view: 'list',
       fields: [
         { name: 'subject', label: '主题' },
-        { name: 'corpname', label: '企业名称' },
+        { name: 'corpname', label: '企业名称', filter: true },
         { name: 'status', label: '状态' },
         { name: 'address', label: '宣讲地址' },
         { name: 'time', label: '宣讲时间' },
@@ -88,9 +98,9 @@ export default {
         this.view = 'list';
       }
     },
-    handleQuery({ filter, paging } = {}) {
+    handleQuery({ filter = {}, paging } = {}) {
       this.view = 'list';
-      this.query({ status: this.status, paging });
+      this.query({ ...filter, status: this.status, paging });
     },
     handleNew() {
       this.form = { data: { jobs: [], unit: this.unit }, isNew: true };

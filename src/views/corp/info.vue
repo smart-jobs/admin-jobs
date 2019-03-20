@@ -1,18 +1,28 @@
 <template>
   <div class="lite">
-    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" @open="handleOpen" @query="handleQuery" v-if="view == 'list'">
+    <data-grid
+      :data="items"
+      :meta="fields"
+      :operation="operation"
+      :paging="true"
+      :total="total"
+      :filter="true"
+      @open="handleOpen"
+      @query="handleQuery"
+      v-if="view == 'list'"
+    >
     </data-grid>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
       <div slot="header">
         <span>企业用户信息</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <cord-info :data="current"> </cord-info>
+      <corp-info :data="current"> </corp-info>
     </el-card>
   </div>
 </template>
 <script>
-import CordInfo from '@/components/jobs/cord-info';
+import CorpInfo from '@/components/jobs/corp-info';
 import DataGrid from '@naf/data/filter-grid';
 import { createNamespacedHelpers } from 'vuex';
 
@@ -20,14 +30,14 @@ const { mapState, mapActions } = createNamespacedHelpers('jobs/corp');
 
 export default {
   components: {
-    CordInfo,
+    CorpInfo,
     DataGrid,
   },
   data() {
     return {
       view: 'list',
       fields: [
-        { name: 'corpname', label: '企业名称' },
+        { name: 'corpname', label: '企业名称', filter: true },
         { name: 'info.city.name', label: '所在城市' },
         { name: 'info.scale.name', label: '企业规模' },
         { name: 'info.nature.name', label: '企业性质' },
@@ -51,9 +61,9 @@ export default {
         this.view = 'details';
       }
     },
-    handleQuery({ filter, paging } = {}) {
+    handleQuery({ filter = {}, paging } = {}) {
       this.view = 'list';
-      this.queryInfo({ paging });
+      this.queryInfo({ ...filter, paging });
     },
   },
   computed: {

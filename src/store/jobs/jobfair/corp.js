@@ -1,15 +1,14 @@
 import Vue from 'vue';
 import qs from 'qs';
 import assert from 'assert';
-import * as types from './.mutation.js';
+import * as types from '../.mutation.js';
 import config from '@frame/config';
 const { pageSize = 10 } = config;
 
 const api = {
-  create: '/jobs/jobfair/create',
-  update: '/jobs/jobfair/update',
-  query: '/jobs/jobfair/query',
-  fetch: '/jobs/jobfair/fetch',
+  query: '/jobs/jobfair/corp/query',
+  review: '/jobs/jobfair/corp/review',
+  fetch: '/jobs/jobfair/corp/fetch',
 };
 // initial state
 export const state = () => ({
@@ -20,23 +19,18 @@ export const state = () => ({
 
 // actions
 export const actions = {
-  async query({ commit }, { status, corpname, paging = {} }) {
+  async query({ commit }, { fair_id, status, corpname, paging = {} }) {
     const { page = 1, size = pageSize } = paging;
     const skip = Math.max(0, (page - 1) * size);
-    const param = qs.stringify({ status, skip, size });
-    const res = await this.$axios.$get(`${api.query}?${param}`);
+    const param = { fair_id, status, corpname, skip, limit: size };
+    const res = await this.$axios.$get(api.query, param);
     if (res.errcode === 0) {
       commit(types.LOADED, res);
     }
     return res;
   },
-  async create({ commit }, { data }) {
-    const res = await this.$axios.$post(`${api.create}`, data);
-    if (res.errcode === 0) commit(types.CREATED, res.data);
-    return res;
-  },
-  async update({ commit }, { data, id }) {
-    const res = await this.$axios.$post(`${api.update}?id=${id}`, data);
+  async review({ commit }, { status, booth, remark, id }) {
+    const res = await this.$axios.$post(`${api.review}?id=${id}`, { status, booth, remark });
     if (res.errcode === 0) commit(types.UPDATED, res.data);
     return res;
   },
@@ -59,9 +53,6 @@ export const mutations = {
   [types.UPDATED](state, payload) {
     const idx = state.items.findIndex(p => p._id === payload._id);
     Vue.set(state.items, idx, payload);
-  },
-  [types.CREATED](state, payload) {
-    state.items.push(payload);
   },
 };
 

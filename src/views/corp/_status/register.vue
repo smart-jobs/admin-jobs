@@ -1,6 +1,16 @@
 <template>
   <div class="lite">
-    <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" @open="handleOpen" @query="handleQuery" v-if="view == 'list'">
+    <data-grid
+      :data="items"
+      :meta="fields"
+      :operation="operation"
+      :paging="true"
+      :total="total"
+      :filter="true"
+      @open="handleOpen"
+      @query="handleQuery"
+      v-if="view == 'list'"
+    >
     </data-grid>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
       <div slot="header">
@@ -16,7 +26,7 @@
   </div>
 </template>
 <script>
-import DataInfo from '@/components/jobs/cord-info';
+import DataInfo from '@/components/jobs/corp-info';
 import DataGrid from '@naf/data/filter-grid';
 import { createNamespacedHelpers } from 'vuex';
 
@@ -31,7 +41,7 @@ export default {
     return {
       view: 'list',
       fields: [
-        { name: 'corpname', label: '企业名称' },
+        { name: 'corpname', label: '企业名称', filter: true },
         { name: 'status', label: '状态' },
         { name: 'info.city.name', label: '所在城市' },
         { name: 'info.scale.name', label: '企业规模' },
@@ -71,9 +81,9 @@ export default {
       }
     },
     // eslint-disable-next-line no-unused-vars
-    handleQuery({ filter, paging } = {}) {
+    handleQuery({ filter = {}, paging } = {}) {
       this.view = 'list';
-      this.queryReg({ status: this.status, paging });
+      this.queryReg({ ...filter, status: this.status, paging });
     },
   },
   computed: {

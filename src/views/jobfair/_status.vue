@@ -17,6 +17,30 @@
         @publish="handlePublish"
         @unpublish="handleUnpublish"
       >
+        <template slot="list-ext">
+          <el-table-column label="参会企业情况" prop="corp_count">
+            <template slot-scope="{ row }">
+              <span v-if="row.corp_count">
+                <el-tooltip content="签到 / 审核 / 总数">
+                  <router-link :to="{ name: 'jobfair_corp', params: { fair_id: row.id } }">
+                    {{ row.corp_count.checked }} / {{ row.corp_count.approved }} / {{ row.corp_count.total }}
+                  </router-link>
+                </el-tooltip>
+              </span>
+            </template>
+          </el-table-column>
+          <el-table-column label="入场券情况" prop="corp_count">
+            <template slot-scope="{ row }">
+              <span v-if="row.ticket_count">
+                <el-tooltip content="入场 / 总数">
+                  <router-link :to="{ name: 'jobfair_ticket', params: { fair_id: row.id } }">
+                    {{ row.ticket_count.verified }} / {{ row.ticket_count.total }}
+                  </router-link>
+                </el-tooltip>
+              </span>
+            </template>
+          </el-table-column>
+        </template>
       </data-grid>
     </el-card>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
@@ -62,10 +86,8 @@ export default {
         { name: 'subject', label: '主题' },
         { name: 'type', label: '类型' },
         { name: 'status', label: '状态' },
-        { name: 'city.name', label: '举办城市' },
         { name: 'address', label: '举办地址' },
-        { name: 'time', label: '举办时间' },
-        { name: 'meta.createdAt', label: '创建时间' },
+        { name: 'date', label: '举办日期' },
       ],
       /* 操作类型 */
       oper0: [

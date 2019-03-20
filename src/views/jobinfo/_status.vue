@@ -5,7 +5,17 @@
         <span>招聘信息列表</span>
         <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" v-if="status == '0'">发布招聘信息</el-button>
       </div>
-      <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" @open="handleOpen" @query="handleQuery" @edit="handleEdit">
+      <data-grid
+        :data="items"
+        :meta="fields"
+        :operation="operation"
+        :paging="true"
+        :total="total"
+        :filter="true"
+        @open="handleOpen"
+        @query="handleQuery"
+        @edit="handleEdit"
+      >
       </data-grid>
     </el-card>
     <el-card class="details" size="mini" v-else-if="view == 'details'">
@@ -54,7 +64,7 @@ export default {
       view: 'list',
       fields: [
         { name: 'title', label: '标题' },
-        { name: 'corp.name', label: '企业名称' },
+        { name: 'corpname', label: '企业名称', filter: true },
         { name: 'status', label: '状态' },
         { name: 'city.name', label: '所在城市' },
         { name: 'meta.createdAt', label: '创建时间' },

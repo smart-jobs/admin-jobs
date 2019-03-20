@@ -1,16 +1,17 @@
 import Vue from 'vue';
 import qs from 'qs';
 import assert from 'assert';
-import * as types from './.mutation.js';
+import * as types from '../.mutation.js';
 import config from '@frame/config';
 const { pageSize = 10 } = config;
 
 const api = {
-  query: '/jobs/jobinfo/query',
-  review: '/jobs/jobinfo/review',
-  update: '/jobs/jobinfo/update',
-  fetch: '/jobs/jobinfo/fetch',
-  create: '/jobs/jobinfo/create',
+  create: '/jobs/jobfair/create',
+  update: '/jobs/jobfair/update',
+  query: '/jobs/jobfair/query',
+  fetch: '/jobs/jobfair/fetch',
+  corp_count: '/jobs/jobfair/corp/count',
+  ticket_count: '/jobs/jobfair/ticket/count',
 };
 // initial state
 export const state = () => ({
@@ -21,19 +22,18 @@ export const state = () => ({
 
 // actions
 export const actions = {
-  async query({ commit }, { status, corpname, paging = {} }) {
+  async query({ commit, dispatch }, { status, paging = {} }) {
     const { page = 1, size = pageSize } = paging;
     const skip = Math.max(0, (page - 1) * size);
-    const param = { status, corpname, skip, limit: size };
+    const param = { status, skip, limit: size };
     const res = await this.$axios.$get(api.query, param);
     if (res.errcode === 0) {
       commit(types.LOADED, res);
+      res.data.forEach(p => {
+        dispatch('corp_count', { fair_id: p.id });
+        dispatch('ticket_count', { fair_id: p.id });
+      });
     }
-    return res;
-  },
-  async review({ commit }, { status, id }) {
-    const res = await this.$axios.$post(`${api.review}?id=${id}`, { status });
-    if (res.errcode === 0) commit(types.UPDATED, { status, id });
     return res;
   },
   async create({ commit }, { data }) {
@@ -49,6 +49,16 @@ export const actions = {
   async fetch({ commit }, { id }) {
     const res = await this.$axios.$get(`${api.fetch}?id=${id}`);
     if (res.errcode === 0) commit(types.SELECTED, res.data);
+    return res;
+  },
+  async corp_count({ commit }, { fair_id }) {
+    const res = await this.$axios.$get(api.corp_count, { fair_id });
+    if (res.errcode === 0) commit(types.CORP_COUNTED, { fair_id, data: res.data });
+    return res;
+  },
+  async ticket_count({ commit }, { fair_id }) {
+    const res = await this.$axios.$get(api.ticket_count, { fair_id });
+    if (res.errcode === 0) commit(types.TICKET_COUNTED, { fair_id, data: res.data });
     return res;
   },
 };
@@ -68,6 +78,14 @@ export const mutations = {
   },
   [types.CREATED](state, payload) {
     state.items.push(payload);
+  },
+  [types.CORP_COUNTED](state, { fair_id, data }) {
+    const item = state.items.find(p => p._id === fair_id);
+    Vue.set(item, 'corp_count', data);
+  },
+  [types.TICKET_COUNTED](state, { fair_id, data }) {
+    const item = state.items.find(p => p._id === fair_id);
+    Vue.set(item, 'ticket_count', data);
   },
 };
 
