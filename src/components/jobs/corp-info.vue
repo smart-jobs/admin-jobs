@@ -1,12 +1,26 @@
 <template>
   <el-tabs v-model="activeName" style="min-height: 400px">
-    <el-tab-pane label="企业参会信息" name="first">
+    <el-tab-pane label="企业信息" name="first">
       <el-form label-width="100px">
         <el-form-item label="企业名称">
           {{ data.corpname }}
         </el-form-item>
         <el-form-item label="企业描述">
           {{ data.description }}
+        </el-form-item>
+      </el-form>
+    </el-tab-pane>
+    <el-tab-pane label="基本情况" name="second">
+      <el-form label-width="100px">
+        <el-form-item v-for="(item, index) in infoFields" :key="'info-field-' + index" :label="item.label" :prop="item.name">
+          {{ getFieldValue(item.name) }}
+        </el-form-item>
+      </el-form>
+    </el-tab-pane>
+    <el-tab-pane label="联系方式" name="third">
+      <el-form label-width="100px">
+        <el-form-item v-for="(item, index) in contactFields" :key="'contact-field-' + index" :label="item.label" :prop="item.name">
+          {{ getFieldValue(item.name) }}
         </el-form-item>
       </el-form>
     </el-tab-pane>
