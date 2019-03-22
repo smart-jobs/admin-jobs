@@ -74,7 +74,12 @@ export const mutations = {
   },
   [types.UPDATED](state, payload) {
     const idx = state.items.findIndex(p => p._id === payload._id);
-    Vue.set(state.items, idx, payload);
+    if (idx >= 0) {
+      const { corp_count, ticket_count } = state.items[idx];
+      Vue.set(state.items, idx, payload);
+      Vue.set(state.items[idx], 'corp_count', corp_count);
+      Vue.set(state.items[idx], 'ticket_count', ticket_count);
+    }
   },
   [types.CREATED](state, payload) {
     state.items.push(payload);

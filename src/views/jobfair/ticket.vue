@@ -24,6 +24,7 @@ export default {
       view: 'list',
       fields: [
         { name: 'user.name', label: '姓名', filter: true },
+        { name: 'user.yxmc', label: '所在院校', filter: true },
         { name: 'type', label: '门票类型', formatter: this.typeLabel },
         { name: 'origin', label: '用户类型', formatter: this.originLabel },
         { name: 'verify.status', label: '使用状态', formatter: this.statusLabel },

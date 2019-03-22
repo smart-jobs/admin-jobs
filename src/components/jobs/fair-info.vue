@@ -22,9 +22,7 @@
         </el-form-item>
       </el-form>
     </el-tab-pane>
-    <el-tab-pane label="招聘会详情" name="second">
-      {{ data.content }}
-    </el-tab-pane>
+    <el-tab-pane label="招聘会详情" name="second" v-html="data.content"> </el-tab-pane>
     <el-tab-pane label="配置信息" name="third">
       <el-form v-model="data" label-width="150px">
         <el-form-item label="数量限制">
@@ -36,10 +34,9 @@
           <!-- <el-time-select v-model="limit.count" :picker-options="{ start: '08:30',step: '00:10',end: '18:30'}" 
             placeholder="受限门票入场时间"> -->
         </el-form-item>
-        <el-form-item label="扫码设备验证密码">
+        <!-- <el-form-item label="扫码设备验证密码">
           {{ getFieldValue('secret') }}
-          <!-- <el-input v-model="secret" placeholder="请输入密码" type="password"></el-input> -->
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
     </el-tab-pane>
   </el-tabs>
