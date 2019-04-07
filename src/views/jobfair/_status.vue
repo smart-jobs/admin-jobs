@@ -17,7 +17,7 @@
         @publish="handlePublish"
         @unpublish="handleUnpublish"
       >
-        <template slot="list-ext">
+        <template slot="ext">
           <el-table-column label="参会企业情况" prop="corp_count">
             <template slot-scope="{ row }">
               <span v-if="row.corp_count">
