@@ -42,13 +42,13 @@ module.exports = {
       // },
       '/platform/api': {
         // target: 'http://smart.localhost:8000',
-        target: 'http://smart.chinahuian.cn',
+        target: 'http://smart.jilinjobswx.cn',
       },
       '/files': {
-        target: 'http://smart.chinahuian.cn',
+        target: 'http://smart.jilinjobswx.cn',
       },
       '/ddapi': {
-        target: 'http://smart.chinahuian.cn',
+        target: 'http://smart.jilinjobswx.cn',
         // pathRewrite: { '^/ddapi': '' },
       },
     },
