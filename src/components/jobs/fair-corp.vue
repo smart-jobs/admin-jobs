@@ -32,13 +32,15 @@ const requiredAndMaxlen = (name, len = 0) => {
 };
 
 export default {
-  name: 'talk-form',
+  name: 'fair-corp',
   props: {
     data: { type: Object, required: true },
   },
   data() {
     return {
-      form: {},
+      form: {
+        booth: this.data.booth,
+      },
       rules: {
         booth: requiredAndMaxlen('展位编号', 100),
       },

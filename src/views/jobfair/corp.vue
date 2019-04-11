@@ -5,7 +5,20 @@
         <span>参会企业列表</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 0" type="text" @click="handleBack">返回</el-button>
       </div>
-      <data-grid :data="items" :meta="fields" :operation="operation" :paging="true" :total="total" :filter="true" @open="handleOpen" @query="handleQuery">
+      <data-grid
+        :data="items"
+        :meta="fields"
+        :operation="operation"
+        :paging="true"
+        :total="total"
+        :filter="true"
+        :action="true"
+        @open="handleOpen"
+        @query="handleQuery"
+      >
+        <template slot="action">
+          <el-button icon="el-icon-download" type="primary" size="mini" @click="handleExport">导出企业列表</el-button>
+        </template>
       </data-grid>
     </el-card>
     <el-card class="details" size="mini" v-else-if="view == 'review'">
@@ -80,6 +93,14 @@ export default {
         default:
           return cellValue;
       }
+    },
+    handleExport() {
+      // this.$message({
+      //   type: 'info',
+      //   message: '功能还未实现',
+      // });
+      const { fair_id } = this.$route.params;
+      window.open(`/platform/api/jobs/jobfair/corp/export?fair_id=${fair_id}`, "_blank");
     },
   },
   computed: {
