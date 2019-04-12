@@ -3,7 +3,7 @@
     <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header">
         <span>宣讲会列表</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" v-if="status == '0'">发布宣讲会</el-button>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" v-if="status == 'ext'">发布宣讲会</el-button>
       </div>
       <data-grid
         :data="items"
@@ -75,7 +75,7 @@ export default {
   },
   validate({ params }) {
     // Must be a number
-    return /^[0-2]$/.test(params.status);
+    return params.status === 'ext' || /^[0-2]$/.test(params.status);
   },
   created() {
     this.handleQuery();
@@ -100,7 +100,11 @@ export default {
     },
     handleQuery({ filter = {}, paging } = {}) {
       this.view = 'list';
-      this.query({ ...filter, status: this.status, paging });
+      if (this.status !== 'ext') {
+        this.query({ ...filter, status: this.status, external: 0, paging });
+      } else {
+        this.query({ ...filter, external: 1, paging });
+      }
     },
     handleNew() {
       this.form = { data: { jobs: [], unit: this.unit }, isNew: true };

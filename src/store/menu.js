@@ -61,13 +61,18 @@ const items = [
         icon: 'info',
       },
       {
-        title: '已发布信息',
+        title: '已审核信息',
         path: '/jobinfo/0',
         icon: 'info',
       },
       {
         title: '审核失败信息',
         path: '/jobinfo/2',
+        icon: 'info',
+      },
+      {
+        title: '非注册企业',
+        path: '/jobinfo/ext',
         icon: 'info',
       },
     ],
@@ -97,13 +102,23 @@ const items = [
     module: 'jobs',
     children: [
       {
-        title: '待审核',
+        title: '待审核信息',
         path: '/campus/1',
         icon: 'info',
       },
       {
-        title: '已发布',
+        title: '已审核信息',
         path: '/campus/0',
+        icon: 'info',
+      },
+      {
+        title: '审核失败信息',
+        path: '/campus/2',
+        icon: 'info',
+      },
+      {
+        title: '非注册企业',
+        path: '/campus/ext',
         icon: 'info',
       },
     ],

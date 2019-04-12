@@ -36,7 +36,8 @@ module.exports = {
         pathRewrite: { '^/platform/api/jobs': '/admin' },
         onProxyReq(proxyReq, req, res) {
           // add custom header to request
-          proxyReq.setHeader('x-tenant', '10201')
+          // proxyReq.setHeader('x-tenant', '10201');
+          proxyReq.setHeader('x-tenant', '99991');
           // or log the req
         },
       },

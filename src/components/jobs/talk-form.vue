@@ -4,8 +4,8 @@
       <el-form-item label="主题" prop="subject" :required="true">
         <el-input v-model="form.subject"></el-input>
       </el-form-item>
-      <el-form-item label="企业名称" prop="corpname">
-        <el-input v-model="form.corpname" :disabled="!isNew && form.corpid"> </el-input>
+      <el-form-item label="企业名称" prop="corpname" :required="true">
+        <el-input v-model="form.corpname" :disabled="!isNew && form.external != 1"> </el-input>
       </el-form-item>
       <!-- <el-form-item label="宣讲学校" prop="city">
         <code-select category="unit" v-model="form.unit" disabled> </code-select>
@@ -56,6 +56,7 @@ export default {
       form: { limit: { count: 0 }, ..._.cloneDeep(this.data) },
       rules: {
         subject: requiredAndMaxlen('主题', 100),
+        corpname: requiredAndMaxlen('企业名称', 100),
         address: requiredAndMaxlen('宣讲地址', 100),
         date: requiredAndMaxlen('宣讲日期', 40),
         time: requiredAndMaxlen('宣讲时间', 40),

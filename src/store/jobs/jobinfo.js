@@ -21,10 +21,10 @@ export const state = () => ({
 
 // actions
 export const actions = {
-  async query({ commit }, { status, corpname, paging = {} }) {
+  async query({ commit }, { status, external, corpname, paging = {} }) {
     const { page = 1, size = pageSize } = paging;
     const skip = Math.max(0, (page - 1) * size);
-    const param = { status, corpname, skip, limit: size };
+    const param = { status, external, corpname, skip, limit: size };
     const res = await this.$axios.$get(api.query, param);
     if (res.errcode === 0) {
       commit(types.LOADED, res);

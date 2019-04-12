@@ -17,6 +17,7 @@
         @query="handleQuery"
       >
         <template slot="action">
+          <el-button icon="el-icon-download" type="primary" size="mini" @click="handleExport">添加外部企业</el-button>
           <el-button icon="el-icon-download" type="primary" size="mini" @click="handleExport">导出企业列表</el-button>
         </template>
       </data-grid>
@@ -100,7 +101,7 @@ export default {
       //   message: '功能还未实现',
       // });
       const { fair_id } = this.$route.params;
-      window.open(`/platform/api/jobs/jobfair/corp/export?fair_id=${fair_id}`, "_blank");
+      window.open(`/platform/api/jobs/jobfair/corp/export?fair_id=${fair_id}`, '_blank');
     },
   },
   computed: {

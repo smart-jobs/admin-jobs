@@ -5,16 +5,16 @@
         <el-input v-model="form.title"></el-input>
       </el-form-item>
       <el-form-item label="招聘企业" prop="corpname">
-        <el-input v-model="form.corpname" :disabled="!isNew && form.corpid"> </el-input>
+        <el-input v-model="form.corpname" :disabled="!isNew && form.external != 1"> </el-input>
       </el-form-item>
       <el-form-item label="所在城市" prop="city">
-        <code-select category="city" v-model="form.city" mode="pair" placeholder="请选择城市"> </code-select>
+        <code-select category="xzqh" v-model="form.city" mode="pair" placeholder="请选择城市"> </code-select>
       </el-form-item>
       <el-form-item label="需求人数" prop="count">
         <el-input placeholder="请输入需求人数" v-model="form.count"> </el-input>
       </el-form-item>
       <el-form-item label="职位描述" prop="jobdesc">
-        <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="form.jobdesc"> </el-input>
+        <el-input type="textarea" :rows="4" placeholder="请输入内容" v-model="form.jobdesc"> </el-input>
       </el-form-item>
       <el-form-item label="职位类别：" prop="jobcat">
         <code-select category="zwlb" v-model="form.jobcat" mode="pair" placeholder="请选择："> </code-select>
@@ -29,7 +29,7 @@
         <code-select category="xlcc" v-model="form.xlreqs" mode="pair" placeholder="请选择"> </code-select>
       </el-form-item>
       <el-form-item label="专业要求" prop="zyreqs">
-        <el-input type="textarea" :rows="4" placeholder="请输入专业要求描述" v-model="form.zyreqs"> </el-input>
+        <el-input type="textarea" :rows="2" placeholder="请输入专业要求描述" v-model="form.zyreqs"> </el-input>
       </el-form-item>
       <!-- <el-form-item label="招聘学校" prop="city">
         <code-select category="unit" v-model="form.unit" disabled> </code-select>
