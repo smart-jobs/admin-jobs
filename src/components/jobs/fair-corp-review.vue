@@ -23,7 +23,6 @@
 </template>
 <script>
 import _ from 'lodash';
-import { createNamespacedHelpers } from 'vuex';
 
 const requiredAndMaxlen = (name, len = 0) => {
   const rules = [{ required: true, message: `${name}不能为空`, trigger: 'blur' }];

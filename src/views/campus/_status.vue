@@ -31,10 +31,11 @@
     </el-card>
     <el-card class="right details" size="mini" v-else-if="view == 'form'">
       <div slot="header">
-        <span>{{ form.isNew ? '发布宣讲会' : '修改宣讲会' }}</span>
+        <span>{{ isNew ? '发布宣讲会' : '修改宣讲会' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form.data" :is-new="form.isNew" @save="handleSave" @cancel="view = 'list'"> </data-form>
+      <data-form :data="formData" :is-new="isNew" @save="handleSave" @cancel="view = 'list'" @save-item="handleSaveItem" @delete-item="handleDeleteItem">
+      </data-form>
     </el-card>
   </div>
 </template>
@@ -71,6 +72,7 @@ export default {
       ],
       /* 操作类型 */
       operation: [['open', '查看/审核', 'el-icon-view'], ['edit', '编辑', 'el-icon-edit']],
+      isNew: false,
     };
   },
   validate({ params }) {
@@ -85,7 +87,7 @@ export default {
     status: 'handleQuery',
   },
   methods: {
-    ...mapActions(['query', 'review', 'fetch', 'create', 'update']),
+    ...mapActions(['query', 'review', 'fetch', 'create', 'update', 'jobAdd', 'jobDelete', 'jobUpdate']),
     async handleOpen(data) {
       const res = await this.fetch({ id: data._id });
       if (this.$checkRes(res)) {
@@ -107,13 +109,13 @@ export default {
       }
     },
     handleNew() {
-      this.form = { data: { jobs: [], unit: this.unit }, isNew: true };
+      this.isNew = true;
       this.view = 'form';
     },
     async handleEdit({ id }) {
       const res = await this.fetch({ id });
       this.$checkRes(res, () => {
-        this.form = { data: { ...res.data }, isNew: false };
+        this.isNew = false;
         this.view = 'form';
       });
     },
@@ -131,12 +133,33 @@ export default {
         this.view = 'list';
       }
     },
+    async handleSaveItem({ isNew, data }) {
+      console.log('save-item:', data);
+      let msg, promise;
+      if (isNew) {
+        promise = this.jobAdd(data);
+        msg = '职位信息添加成功';
+      } else {
+        promise = this.jobUpdate(data);
+        msg = '职位信息修改成功';
+      }
+      const res = await promise;
+      this.$checkRes(res, msg);
+    },
+    async handleDeleteItem(data) {
+      console.log('delete-item:', data);
+      const res = await this.jobDelete(data);
+      this.$checkRes(res, '删除职位信息成功');
+    },
   },
   computed: {
     ...mapState(['items', 'current', 'total']),
     ...mapGetters(['unit']),
     status() {
       return this.$route.params.status;
+    },
+    formData() {
+      return this.isNew ? { jobs: [], unit: this.unit } : this.current;
     },
   },
 };

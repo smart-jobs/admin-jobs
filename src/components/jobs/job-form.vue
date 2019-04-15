@@ -49,7 +49,6 @@
 </template>
 <script>
 import _ from 'lodash';
-import { createNamespacedHelpers } from 'vuex';
 import CodeSelect from '@naf/data/code-select';
 
 const requiredAndMaxlen = (name, len = 0) => {

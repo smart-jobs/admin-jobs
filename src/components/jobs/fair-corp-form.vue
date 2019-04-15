@@ -3,32 +3,14 @@
     <el-tab-pane label="基本信息" name="first">
       <el-form ref="form" :model="form" :rules="rules" size="mini" label-width="120px">
         <slot>
-          <el-form-item label="主题" prop="subject" :required="true">
-            <el-input v-model="form.subject"></el-input>
-          </el-form-item>
           <el-form-item label="企业名称" prop="corpname" :required="true">
-            <el-input v-model="form.corpname" :disabled="!isNew && form.external != 1"> </el-input>
+            <el-input v-model="form.corpname"></el-input>
           </el-form-item>
-          <!-- <el-form-item label="宣讲学校" prop="city">
-        <code-select category="unit" v-model="form.unit" disabled> </code-select>
-      </el-form-item> -->
-          <el-form-item label="宣讲日期" prop="date" :required="true">
-            <el-date-picker v-model="form.date" type="date" value-format="yyyy-MM-dd" placeholder="请选择日期"> </el-date-picker>
+          <el-form-item label="展位编号" prop="booth" :required="true">
+            <el-input v-model="form.booth" placeholder="请输入展位编号"></el-input>
           </el-form-item>
-          <el-form-item label="宣讲时间" prop="time" :required="true">
-            <el-input v-model="form.time" placeholder="请输入时间描述"></el-input>
-          </el-form-item>
-          <el-form-item label="宣讲地址" prop="address" :required="true">
-            <el-input v-model="form.address" placeholder="请输入地址描述"></el-input>
-          </el-form-item>
-          <el-form-item label="招聘联系电话" prop="contact" :required="true">
-            <el-input v-model="form.contact" placeholder="请输入联系电话"></el-input>
-          </el-form-item>
-          <el-form-item label="简历投递邮箱" prop="email" :required="true">
-            <el-input v-model="form.email" placeholder="请输入电子邮箱"></el-input>
-          </el-form-item>
-          <el-form-item label="宣讲会详情" prop="content" :required="true">
-            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.content"> </el-input>
+          <el-form-item label="企业详情" prop="description" :required="true">
+            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.description"> </el-input>
           </el-form-item>
           <el-form-item>
             <el-button @click="$emit('cancel')" size="mini">取 消</el-button>
@@ -56,7 +38,7 @@ export default {
   components: {
     JobList,
   },
-  name: 'talk-form',
+  name: 'fair-corp-form',
   props: {
     data: { type: Object, required: true },
     isNew: { type: Boolean, default: false } /* 是否新创建 */,
@@ -66,14 +48,9 @@ export default {
       activeName: 'first',
       form: _.cloneDeep(this.data),
       rules: {
-        subject: requiredAndMaxlen('主题', 100),
         corpname: requiredAndMaxlen('企业名称', 100),
-        address: requiredAndMaxlen('宣讲地址', 100),
-        date: requiredAndMaxlen('宣讲日期', 40),
-        time: requiredAndMaxlen('宣讲时间', 40),
-        contact: requiredAndMaxlen('招聘联系电话', 64),
-        email: requiredAndMaxlen('简历投递邮箱', 64),
-        content: requiredAndMaxlen('宣讲会详情', 10240),
+        booth: requiredAndMaxlen('展位编号', 100),
+        description: requiredAndMaxlen('宣讲会详情', 10240),
       },
     };
   },

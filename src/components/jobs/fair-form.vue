@@ -48,7 +48,6 @@
 </template>
 <script>
 import _ from 'lodash';
-import { createNamespacedHelpers } from 'vuex';
 import WangEditor from '@naf/data/wang-editor';
 import CodeSelect from '@naf/data/code-select';
 
