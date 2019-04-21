@@ -38,7 +38,7 @@
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="招聘职位" name="second" v-if="data.jobs && !isNew">
-      <job-list :data="data.jobs" @save-item="handleSaveItem" @delete-item="handleDeleteItem"></job-list>
+      <job-list :data="data.jobs" @save-item="$emit('save-item', $event)" @delete-item="$emit('delete-item', $event)"></job-list>
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -86,12 +86,6 @@ export default {
           console.warn('form validate error!!!');
         }
       });
-    },
-    handleSaveItem(payload) {
-      this.$emit('save-item', payload);
-    },
-    handleDeleteItem(payload) {
-      this.$emit('delete-item', payload);
     },
   },
 };

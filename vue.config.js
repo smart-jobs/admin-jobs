@@ -30,17 +30,17 @@ module.exports = {
       });
     },
     proxy: {
-      '/platform/api/jobs': {
-        // target: 'http://smart.localhost:8000',
-        target: 'http://localhost:8201',
-        pathRewrite: { '^/platform/api/jobs': '/admin' },
-        onProxyReq(proxyReq, req, res) {
-          // add custom header to request
-          // proxyReq.setHeader('x-tenant', '10201');
-          proxyReq.setHeader('x-tenant', '99991');
-          // or log the req
-        },
-      },
+      // '/platform/api/jobs': {
+      //   // target: 'http://smart.localhost:8000',
+      //   target: 'http://localhost:8201',
+      //   pathRewrite: { '^/platform/api/jobs': '/admin' },
+      //   onProxyReq(proxyReq, req, res) {
+      //     // add custom header to request
+      //     // proxyReq.setHeader('x-tenant', '10201');
+      //     proxyReq.setHeader('x-tenant', '99991');
+      //     // or log the req
+      //   },
+      // },
       '/platform/api': {
         // target: 'http://smart.localhost:8000',
         target: 'http://smart.chinahuian.cn',
