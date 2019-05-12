@@ -1,7 +1,7 @@
 <template>
   <el-form ref="form" :model="form" :rules="rules" size="mini" label-width="100px">
     <slot>
-      <el-form-item label="招聘标题" prop="title" :required="true">
+      <el-form-item label="招聘标题" prop="title">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
       <el-form-item label="招聘企业" prop="corpname">
@@ -34,10 +34,10 @@
       <!-- <el-form-item label="招聘学校" prop="city">
         <code-select category="unit" v-model="form.unit" disabled> </code-select>
       </el-form-item> -->
-      <el-form-item label="失效日期" prop="expired" :required="true">
+      <el-form-item label="失效日期" prop="expired">
         <el-date-picker v-model="form.expired" type="date" value-format="yyyy-MM-dd" placeholder="请选择日期"> </el-date-picker>
       </el-form-item>
-      <el-form-item label="招聘详情" prop="content" :required="true">
+      <el-form-item label="招聘详情" prop="content">
         <el-input type="textarea" :rows="8" placeholder="请输入招聘详情" v-model="form.content"> </el-input>
       </el-form-item>
       <el-form-item>

@@ -4,7 +4,7 @@
       <el-form-item label="企业名称" prop="corpname">
         {{ data.corpname }}
       </el-form-item>
-      <el-form-item label="展位编号" prop="booth" :required="true">
+      <el-form-item label="展位编号" prop="booth">
         <el-input v-model="form.booth" placeholder="请输入展位编号"></el-input>
       </el-form-item>
       <el-form-item>

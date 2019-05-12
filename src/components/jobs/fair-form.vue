@@ -1,10 +1,10 @@
 <template>
   <el-form ref="form" :model="form" :rules="rules" size="mini" label-width="100px">
     <slot>
-      <el-form-item label="主题" prop="subject" :required="true">
+      <el-form-item label="主题" prop="subject">
         <el-input v-model="form.subject"></el-input>
       </el-form-item>
-      <el-form-item label="类型" prop="type" :required="true">
+      <el-form-item label="类型" prop="type">
         <el-select v-model="form.type" placeholder="请选择招聘会类型">
           <el-option label="校园招聘会" value="校园招聘会"> </el-option>
           <el-option label="网络招聘会" value="网络招聘会" :disabled="true"> </el-option>
@@ -16,16 +16,16 @@
       <el-form-item label="举办城市" prop="city">
         <code-select category="city" v-model="form.city" mode="pair" placeholder="请选择城市"> </code-select>
       </el-form-item>
-      <el-form-item label="举办地址" prop="address" :required="true">
+      <el-form-item label="举办地址" prop="address">
         <el-input v-model="form.address" placeholder="请输入地址描述"></el-input>
       </el-form-item>
-      <el-form-item label="举办日期" prop="date" :required="true">
+      <el-form-item label="举办日期" prop="date">
         <el-date-picker v-model="form.date" type="date" value-format="yyyy-MM-dd" placeholder="请选择日期"> </el-date-picker>
       </el-form-item>
-      <el-form-item label="举办时间" prop="time" :required="true">
+      <el-form-item label="举办时间" prop="time">
         <el-input v-model="form.time" placeholder="请输入时间描述"></el-input>
       </el-form-item>
-      <el-form-item label="招聘会详情" prop="content" :required="true">
+      <el-form-item label="招聘会详情" prop="content">
         <wang-editor v-model="form.content" upload-img-server="/files/jobs/jobfair/upload"></wang-editor>
       </el-form-item>
       <el-form-item label="数量限制" prop="limit.count" v-if="form.type == '校园招聘会'">

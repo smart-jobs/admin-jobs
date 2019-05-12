@@ -3,13 +3,13 @@
     <el-tab-pane label="基本信息" name="first">
       <el-form ref="form" :model="form" :rules="rules" size="mini" label-width="120px">
         <slot>
-          <el-form-item label="企业名称" prop="corpname" :required="true">
+          <el-form-item label="企业名称" prop="corpname">
             <el-input v-model="form.corpname"></el-input>
           </el-form-item>
-          <el-form-item label="展位编号" prop="booth" :required="true">
+          <el-form-item label="展位编号" prop="booth">
             <el-input v-model="form.booth" placeholder="请输入展位编号"></el-input>
           </el-form-item>
-          <el-form-item label="企业详情" prop="description" :required="true">
+          <el-form-item label="企业详情" prop="description">
             <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.description"> </el-input>
           </el-form-item>
           <el-form-item>

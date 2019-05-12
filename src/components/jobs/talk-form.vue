@@ -3,31 +3,31 @@
     <el-tab-pane label="基本信息" name="first">
       <el-form ref="form" :model="form" :rules="rules" size="mini" label-width="120px">
         <slot>
-          <el-form-item label="主题" prop="subject" :required="true">
+          <el-form-item label="主题" prop="subject">
             <el-input v-model="form.subject"></el-input>
           </el-form-item>
-          <el-form-item label="企业名称" prop="corpname" :required="true">
+          <el-form-item label="企业名称" prop="corpname">
             <el-input v-model="form.corpname" :disabled="!isNew && form.external != 1"> </el-input>
           </el-form-item>
           <!-- <el-form-item label="宣讲学校" prop="city">
         <code-select category="unit" v-model="form.unit" disabled> </code-select>
       </el-form-item> -->
-          <el-form-item label="宣讲日期" prop="date" :required="true">
+          <el-form-item label="宣讲日期" prop="date">
             <el-date-picker v-model="form.date" type="date" value-format="yyyy-MM-dd" placeholder="请选择日期"> </el-date-picker>
           </el-form-item>
-          <el-form-item label="宣讲时间" prop="time" :required="true">
+          <el-form-item label="宣讲时间" prop="time">
             <el-input v-model="form.time" placeholder="请输入时间描述"></el-input>
           </el-form-item>
-          <el-form-item label="宣讲地址" prop="address" :required="true">
+          <el-form-item label="宣讲地址" prop="address">
             <el-input v-model="form.address" placeholder="请输入地址描述"></el-input>
           </el-form-item>
-          <el-form-item label="招聘联系电话" prop="contact" :required="true">
+          <el-form-item label="招聘联系电话" prop="contact">
             <el-input v-model="form.contact" placeholder="请输入联系电话"></el-input>
           </el-form-item>
-          <el-form-item label="简历投递邮箱" prop="email" :required="true">
+          <el-form-item label="简历投递邮箱" prop="email">
             <el-input v-model="form.email" placeholder="请输入电子邮箱"></el-input>
           </el-form-item>
-          <el-form-item label="宣讲会详情" prop="content" :required="true">
+          <el-form-item label="宣讲会详情" prop="content">
             <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.content"> </el-input>
           </el-form-item>
           <el-form-item>
