@@ -42,6 +42,8 @@ export const actions = {
     return res;
   },
   async update({ commit }, { data, id }) {
+    const { secret } = data;
+    if (secret && secret.trim() == '') delete data.secret;
     const res = await this.$axios.$post(`${api.update}?id=${id}`, data);
     if (res.errcode === 0) commit(types.UPDATED, res.data);
     return res;

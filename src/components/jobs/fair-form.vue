@@ -28,11 +28,15 @@
       <el-form-item label="招聘会详情" prop="content">
         <wang-editor v-model="form.content" upload-img-server="/files/jobs/jobfair/upload"></wang-editor>
       </el-form-item>
-      <el-form-item label="数量限制" prop="limit.count" v-if="form.type == '校园招聘会'">
-        <el-input-number placeholder="" type="number" v-model="form.limit.count" :min="0"> </el-input-number>
+      <el-form-item label="是否限制" prop="limit.count" v-if="form.type == '校园招聘会'">
+        <el-switch v-model="limits"> </el-switch>
+        <span class="desc">限制非本校学生申请普通入场券数量和入场时间。</span>
+      </el-form-item>
+      <el-form-item label="数量限制" prop="limit.count" v-if="form.type == '校园招聘会' && this.limits">
+        <el-input-number placeholder="" type="number" v-model="form.limit.count" :min="0" v-if="limits"> </el-input-number>
         <span class="desc">非本校学生申请普通入场券数量限制，本校学生不限制。</span>
       </el-form-item>
-      <el-form-item label="时间限制" prop="limit.time" v-if="form.type == '校园招聘会'">
+      <el-form-item label="时间限制" prop="limit.time" v-if="form.type == '校园招聘会' && this.limits">
         <el-time-select v-model="form.limit.time" :picker-options="{ start: '08:30', step: '00:10', end: '18:30' }" placeholder="受限入场时间"></el-time-select>
         <span class="desc">受限入场券只能在规定之后入场，普通入场券无限制。</span>
       </el-form-item>
@@ -70,6 +74,7 @@ export default {
   data() {
     return {
       form: { limit: { count: 0 }, ..._.cloneDeep(this.data) },
+      limits: true,
       rules: {
         subject: requiredAndMaxlen('主题', 100),
         type: requiredAndMaxlen('类型', 40),
@@ -84,7 +89,10 @@ export default {
     handleSave() {
       this.$refs['form'].validate(valid => {
         if (valid) {
-          this.$emit('save', { isNew: this.isNew, data: this.form });
+          const limit = { ...this.form.limit };
+          if (!this.limits) limit.count = -1;
+          const data = { ...this.form, limit };
+          this.$emit('save', { isNew: this.isNew, data });
         } else {
           console.warn('form validate error!!!');
         }
