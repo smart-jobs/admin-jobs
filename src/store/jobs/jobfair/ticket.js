@@ -17,10 +17,14 @@ export const state = () => ({
 
 // actions
 export const actions = {
-  async query({ commit }, { fair_id, 'verify.status': status, paging = {} }) {
+  async query({ commit, rootGetters }, { fair_id, 'verify.status': status, paging = {} }) {
+    const { platform } = rootGetters;
     const { page = 1, size = pageSize } = paging;
     const skip = Math.max(0, (page - 1) * size);
     const param = { fair_id, 'verify.status': status, skip, limit: size };
+    if (platform === 'master') {
+      param._tenant = 'global';
+    }
     const res = await this.$axios.$get(api.query, param);
     if (res.errcode === 0) {
       commit(types.LOADED, res);

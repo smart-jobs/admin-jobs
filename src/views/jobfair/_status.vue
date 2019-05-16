@@ -99,6 +99,7 @@ export default {
         ['open', '查看', 'el-icon-view'],
         ['unpublish', '取消发布', 'el-icon-back', '取消发布后，可以修改招聘会信息，企业也可以提交参展申请。是否现在发布招聘会？'],
       ],
+      oper2: [['open', '查看', 'el-icon-view']],
     };
   },
   validate({ params }) {
@@ -166,11 +167,12 @@ export default {
   },
   computed: {
     ...mapState(['items', 'current', 'total']),
-    ...mapGetters(['unit']),
+    ...mapGetters(['unit', 'platform']),
     status() {
       return this.$route.params.status;
     },
     operation() {
+      if (this.platform === 'master') return this.oper2;
       return this.status === '0' ? this.oper0 : this.oper1;
     },
   },

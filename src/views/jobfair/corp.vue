@@ -18,7 +18,7 @@
         @edit="handleEdit"
       >
         <template slot="action">
-          <el-button icon="el-icon-edit" type="primary" size="mini" @click="handleNew">添加外部企业</el-button>
+          <el-button icon="el-icon-edit" type="primary" size="mini" @click="handleNew" v-if="platform != 'master'">添加外部企业</el-button>
           <el-button icon="el-icon-download" type="primary" size="mini" @click="handleExport">导出企业列表</el-button>
         </template>
       </data-grid>
@@ -28,7 +28,7 @@
         <span>企业参会信息</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-review :data="current" @review="handleReview"> </data-review>
+      <data-review :data="current" @review="handleReview" :readonly="platform === 'master'"> </data-review>
     </el-card>
     <el-card class="details" size="mini" v-else-if="view == 'form'">
       <div slot="header">
@@ -44,7 +44,7 @@
 import DataReview from '@/components/jobs/fair-corp-review';
 import DataForm from '@/components/jobs/fair-corp-form';
 import DataGrid from '@naf/data/filter-grid';
-import { createNamespacedHelpers } from 'vuex';
+import { createNamespacedHelpers, mapGetters } from 'vuex';
 
 const { mapState, mapActions } = createNamespacedHelpers('jobs/jobfair/corp');
 
@@ -170,6 +170,7 @@ export default {
   },
   computed: {
     ...mapState(['items', 'current', 'total']),
+    ...mapGetters(['platform']),
     formData() {
       return this.isNew ? { jobs: [], unit: this.unit } : this.current;
     },

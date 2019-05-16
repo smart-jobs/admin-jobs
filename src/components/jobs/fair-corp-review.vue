@@ -5,7 +5,8 @@
         {{ data.corpname }}
       </el-form-item>
       <el-form-item label="展位编号" prop="booth">
-        <el-input v-model="form.booth" placeholder="请输入展位编号"></el-input>
+        <span v-if="readonly">{{ form.booth }}</span>
+        <el-input v-model="form.booth" placeholder="请输入展位编号" v-else></el-input>
       </el-form-item>
       <el-form-item>
         <el-table :data="data.jobs" style="width: 100%">
@@ -14,7 +15,7 @@
           <el-table-column prop="requirement" label="需求专业" min-width="200"> </el-table-column>
         </el-table>
       </el-form-item>
-      <el-form-item>
+      <el-form-item v-if="!readonly">
         <el-button type="primary" @click="handleReview('0')">审核通过</el-button>
         <el-button type="info" @click="handleReview('2')">审核拒绝</el-button>
       </el-form-item>
@@ -34,6 +35,7 @@ export default {
   name: 'fair-corp',
   props: {
     data: { type: Object, required: true },
+    readonly: { type: Boolean, default: false },
   },
   data() {
     return {

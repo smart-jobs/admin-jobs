@@ -37,7 +37,7 @@ module.exports = {
         onProxyReq(proxyReq, req, res) {
           // add custom header to request
           // proxyReq.setHeader('x-tenant', '10201');
-          proxyReq.setHeader('x-tenant', '99991');
+          proxyReq.setHeader('x-tenant', 'master');
           // or log the req
         },
       },

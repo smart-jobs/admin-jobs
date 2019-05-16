@@ -22,10 +22,14 @@ export const state = () => ({
 
 // actions
 export const actions = {
-  async query({ commit, dispatch }, { status, paging = {} }) {
+  async query({ commit, dispatch, rootGetters }, { status, paging = {} }) {
+    const { platform } = rootGetters;
     const { page = 1, size = pageSize } = paging;
     const skip = Math.max(0, (page - 1) * size);
     const param = { status, skip, limit: size };
+    if (platform === 'master') {
+      param._tenant = 'global';
+    }
     const res = await this.$axios.$get(api.query, param);
     if (res.errcode === 0) {
       commit(types.LOADED, res);
@@ -48,8 +52,13 @@ export const actions = {
     if (res.errcode === 0) commit(types.UPDATED, res.data);
     return res;
   },
-  async fetch({ commit }, { id }) {
-    const res = await this.$axios.$get(`${api.fetch}?id=${id}`);
+  async fetch({ commit, rootGetters }, { id }) {
+    const { platform } = rootGetters;
+    const param = { id };
+    if (platform === 'master') {
+      param._tenant = 'global';
+    }
+    const res = await this.$axios.$get(api.fetch, param);
     if (res.errcode === 0) commit(types.SELECTED, res.data);
     return res;
   },
