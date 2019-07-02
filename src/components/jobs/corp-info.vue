@@ -4,6 +4,7 @@
       <el-form label-width="100px">
         <el-form-item label="企业名称">
           {{ data.corpname }}
+          <el-button type="primary" icon="el-icon-search" size="medium" @click="onSearch">查询</el-button>
         </el-form-item>
         <el-form-item label="企业描述">
           {{ data.description }}
@@ -60,6 +61,11 @@ export default {
   methods: {
     getFieldValue(path) {
       return _.get(this.data, path);
+    },
+    onSearch() {
+      if (this.data && this.data.corpname) {
+        window.open(`https://www.tianyancha.com/search/${this.data.corpname}`);
+      }
     },
   },
 };
