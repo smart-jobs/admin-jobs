@@ -3,6 +3,7 @@
     <slot>
       <el-form-item label="企业名称" prop="corpname">
         {{ data.corpname }}
+        <el-button type="primary" icon="el-icon-search" size="medium" @click="onSearch">查询</el-button>
       </el-form-item>
       <el-form-item label="展位编号" prop="booth">
         <span v-if="readonly">{{ form.booth }}</span>
@@ -60,6 +61,11 @@ export default {
           console.warn('form validate error!!!');
         }
       });
+    },
+    onSearch() {
+      if (this.data && this.data.corpname) {
+        window.open(`https://www.tianyancha.com/search/${this.data.corpname}`);
+      }
     },
   },
 };
